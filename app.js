@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 var passport = require('passport');
 var crypto = require('crypto');
 const MongoStore = require('connect-mongo');
+require('dotenv').config()
+const router = require('./routes')
 
 // Gives us access to variables set in the .env file via `process.env.VARIABLE_NAME` syntax
-require('dotenv').config()
 
 /**
  * -------------- GENERAL SETUP ----------------
@@ -39,10 +40,8 @@ app.use(session({
     }
 }))
 
-app.post('/register', (req, res, next) => {
-    console.log(req.body)
-    res.status(200).send("Hello, World!")
-})
+// Imports all of the routes from ./routes/index.js
+app.use(router)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

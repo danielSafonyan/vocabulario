@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <title>Register Vocabulario</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="root">
+        <main class="app-container">
+            <h2 class="title">¡Registrarse!</h2>
+            <form class="signup-form" action="./register" method="POST" autocomplete="off">
+                <!-- <label for="name" class="visually-hidden">Your Name</label>
+                <input id="name" name="name" class="input" type="text" required minlength="3" placeholder="Name" value="danielSafonyan"> -->
+                <label for="email" class="visually-hidden">Your Email</label>
+                <input id="email" name="email" class="input" type="email" required placeholder="Email" value="danielSafonyan@gmail.com">
+                <label for="password" class="visually-hidden">Password</label>
+                <input id="password" name="password" class="input" type="password" required placeholder="●●●●●●●●●●" value="1234">
+                <button class="button button-primary">Registrarse</button>
+            </form>
+            <!-- <a href="#" class="btn btn-secondary">Iniciar sesión</a> -->
+            <a href="../login" class="login-link">Iniciar sesión</a>
+        </main>
+    </div>
+</body>
+</html>
