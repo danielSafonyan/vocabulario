@@ -14,7 +14,7 @@ async function postRegister(req, res, next) {
     const salt = saltHash.salt;
     const hash = saltHash.hash;
 
-    let userExists
+    let userExists;
 
     try {
         userExists = await User.findOne({ email: req.body.email })
@@ -40,16 +40,10 @@ async function postRegister(req, res, next) {
     try {
         const user = await newUser.save()
         console.log(user)
+        res.redirect('/login');
     } catch (err) {
-        
+        res.status(500).send(`Internal server error: ${err}.`)
     }
-
-    
-        .then((user) => {
-            console.log(user);
-        });
-
-    res.redirect('/login');
 }
 
 module.exports = {
