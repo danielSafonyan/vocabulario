@@ -1,13 +1,11 @@
 const express = require('express')
-const session = require('express-session');
 const mongoose = require('mongoose');
+const session = require('express-session');
 var passport = require('passport');
 var crypto = require('crypto');
 const MongoStore = require('connect-mongo');
 require('dotenv').config()
 const router = require('./routes')
-
-// Gives us access to variables set in the .env file via `process.env.VARIABLE_NAME` syntax
 
 /**
  * -------------- GENERAL SETUP ----------------
@@ -40,10 +38,14 @@ app.use(session({
     }
 }))
 
+require('./config/passport')
+app.use(passport.initialize())
+app.use(passport.session())
+
 // Imports all of the routes from ./routes/index.js
 app.use(router)
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Listening on port ${port}.`)
-})
+  console.log(`Server running on port ${port}`);
+});
