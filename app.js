@@ -14,6 +14,8 @@ const router = require('./routes')
 // Create the Express application
 const app = express()
 
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 // Buil-in middleware, parses incoming requests with JSON payloads.
 app.use(express.json())
 // Buil-in middleware, parses incoming requests with URL-encoded payloads.
