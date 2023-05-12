@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const createError = require('http-errors')
 const path = require('path');
 const passport = require('passport');
 const mongoose = require('mongoose')
@@ -91,6 +92,13 @@ function postLogin(req, res, next) {
 }
 
 function getLanguageSuggestions(req, res, next) {
+    const isReferred = req.headers.referer && req.headers.referer !== req.url;
+    
+    if (!isReferred) {
+        console.log("I am here!")
+        return next(createError(404, "Not Found"))
+    }
+
     const languages = {
         'en': 'inglés',
         'ru': 'ruso',
