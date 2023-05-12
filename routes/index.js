@@ -78,13 +78,11 @@ async function postRegister(req, res, next) {
 }
 
 function getRegister(req, res, next) {
-    const registerHtml = path.join(__dirname, '..', 'pages', 'register.html')
-    res.status(200).sendFile(registerHtml)
+    res.status(200).render('register')
 }
 
 function getLogin(req, res, next) {
-    const loginHtml = path.join(__dirname, '..', 'pages', 'login.html')
-    res.status(200).sendFile(loginHtml)
+    res.status(200).render('login')
 }
 
 function postLogin(req, res, next) {
@@ -104,8 +102,8 @@ function getLanguageSuggestions(req, res, next) {
     const acceptLanguageHeader = req.headers['accept-language'] || defaultLanguage;
     const languageRegex = /(en|ru|de|it|fr|es)/i;
     const suggestedLanguage = acceptLanguageHeader.match(languageRegex).pop()
-    
-    res.send(`suggestedLanguage ${languages[suggestedLanguage]}`)
+    const displayedLanguage = languages[suggestedLanguage]
+    res.status(200).render('suggestedLanguage', { displayedLanguage })
 }
 
 
