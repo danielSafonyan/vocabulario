@@ -10,24 +10,19 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <title>Login Vocabulario</title>
+    <title>Suggested Language Vocabulario</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div id="root">
         <main class="app-container">
-            <h2 class="title">¡Iniciar sesión!</h2>
-            <form class="signup-form" action="./login" method="POST" autocomplete="off">
-                <!-- <label for="name" class="visually-hidden">Your Name</label>
-                <input id="name" name="name" class="input" type="text" required minlength="3" placeholder="Name" value="danielSafonyan"> -->
-                <label for="username" class="visually-hidden">Your Username</label>
-                <input id="username" name="username" class="input" type="username" required placeholder="username" value="danielSafonyan">
-                <label for="password" class="visually-hidden">Your Password</label>
-                <input id="password" name="password" class="input" type="password" required placeholder="●●●●●●●●●●" value="1234">
-                <button class="button button-primary">Iniciar sesión</button>
+            <h2 class="title">¡Hola!</h2>
+            <h2 class="title">¿Quieres traducir al <%= displayedLanguage %>?</h2>
+            <form class="form" action="./suggested-language" method="POST">
+                <button class="button button-primary">Sí</button>
+                <!-- <button class="button button-secondary">No</button> -->
             </form>
-            <!-- <a href="#" class="btn btn-secondary">Iniciar sesión</a> -->
-            <a href="../register" class="login-link">Registrarse</a>
+            <a href="../register" class="login-link">No</a>
         </main>
     </div>
 </body>
