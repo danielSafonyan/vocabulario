@@ -4,11 +4,12 @@ const LocalStrategy = require('passport-local').Strategy
 const validPassword = require('../lib/passwordUtils').validPassword;
 const User = mongoose.models.User;
 
-const customFields = {
-    usernameField: "email"
-}
+// const customFields = {
+//     usernameField: "email"
+// }
 
-const strategy = new LocalStrategy(customFields, verifyFunction)
+// const strategy = new LocalStrategy(customFields, verifyFunction)
+const strategy = new LocalStrategy(verifyFunction)
 
 passport.use(strategy)
 
