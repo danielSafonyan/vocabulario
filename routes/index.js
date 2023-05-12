@@ -17,6 +17,9 @@ router.route('/login')
                 failureRedirect: '/fail',
             }), postLogin)
 
+router.route('/suggested-language')
+            .get(getLanguageSuggestions)
+
 router.get('/protected-route', (req, res) => {
     const isAuth = req.isAuthenticated()
 
@@ -87,6 +90,22 @@ function getLogin(req, res, next) {
 function postLogin(req, res, next) {
     const body = req.body
     res.status(200).json(body)
+}
+
+function getLanguageSuggestions(req, res, next) {
+    const languages = {
+        'en': 'inglés',
+        'ru': 'ruso',
+        'de': 'alemán',
+        'it': 'italiano',
+        'fr': 'francés'
+    }
+    const defaultLanguage = 'en'
+    const acceptLanguageHeader = req.headers['accept-language'] || defaultLanguage;
+    const languageRegex = /(en|ru|de|it|fr|es)/i;
+    const suggestedLanguage = acceptLanguageHeader.match(languageRegex).pop()
+    
+    res.send(`suggestedLanguage ${languages[suggestedLanguage]}`)
 }
 
 
