@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 require('../config/database')
 const User = mongoose.models.User;
 const genPassword = require('../lib/passwordUtils').genPassword;
+const { getTranslationLanguage } = require('./translationLanguage')
 
 router.route('/register')
             .get(getRegister)
@@ -23,11 +24,11 @@ router.route('/login')
             }))
 
 router.route('/suggested-language')
-            .get(getLanguageSuggestions)
-            // .patch((req, res, next) => {
-            //     res.send("ok")
-            // })
-router.patch('/suggested-language', patchLanguageSuggestions)
+            .get(getLanguageSuggestion)
+            .patch(patchLanguageSuggestion)
+
+router.route('.translation-language')
+            .get(getTranslationLanguage)
 
 router.get('/protected-route', (req, res) => {
     const isAuth = req.isAuthenticated()
@@ -95,7 +96,7 @@ function getLogin(req, res, next) {
     res.status(200).render('login')
 }
 
-function getLanguageSuggestions(req, res, next) {
+function getLanguageSuggestion(req, res, next) {
     const isReferred = req.headers.referer && req.headers.referer !== req.url;
     
     // if (!isReferred) {
@@ -117,7 +118,7 @@ function getLanguageSuggestions(req, res, next) {
     res.status(200).render('suggestedLanguage', { dispLang, transLang })
 }
 
-async function patchLanguageSuggestions(req, res, next) {
+async function patchLanguageSuggestion(req, res, next) {
     if (!req.user) {
         res.redirect('/');
     }
