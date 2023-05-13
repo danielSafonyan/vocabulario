@@ -1,8 +1,16 @@
 const mongoose = require('mongoose')
 const User = mongoose.models.User;
 
+const languages = {
+        'en': 'inglés',
+        'ru': 'ruso',
+        'de': 'alemán',
+        'it': 'italiano',
+        'fr': 'francés',
+    }
+
 function getTranslationLanguage(req, res, next) {
-    res.status(200).render('translationLanguage')
+    res.status(200).render('translationLanguage', { languages })
 }
 
 function getSuggestionLanguage(req, res, next) {
@@ -11,14 +19,7 @@ function getSuggestionLanguage(req, res, next) {
     // if (!isReferred) {
     //     return next(createError(404, "Not Found"))
     // }
-
-    const languages = {
-        'en': 'inglés',
-        'ru': 'ruso',
-        'de': 'alemán',
-        'it': 'italiano',
-        'fr': 'francés'
-    }
+    
     const defaultLanguage = 'en'
     const acceptLanguageHeader = req.headers['accept-language'] || defaultLanguage;
     const languageRegex = /(en|ru|de|it|fr|es)/i;
@@ -27,7 +28,7 @@ function getSuggestionLanguage(req, res, next) {
     res.status(200).render('suggestedLanguage', { dispLang, transLang })
 }
 
-async function patchTranslationLanguage(req, res, next) {
+function patchTranslationLanguage(req, res, next) {
     if (!req.user) { res.redirect('/') }
     
     updateTransLang(req, next)
@@ -35,7 +36,7 @@ async function patchTranslationLanguage(req, res, next) {
     res.redirect(303, '/changedLang')
 }
 
-async function patchSuggestionLanguage(req, res, next) {
+function patchSuggestionLanguage(req, res, next) {
     if (!req.user) { res.redirect('/') }
 
     updateTransLang(req, next)
@@ -58,8 +59,6 @@ async function updateTransLang(req, next) {
         next(err)
     }
 }
-
-
 
 module.exports = {
     getTranslationLanguage,

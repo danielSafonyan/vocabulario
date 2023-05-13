@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <title>Translation Language Vocabulario</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="root">
+        <main class="app-container">
+            <h2 class="title">¡Elige tu idioma!</h2>
+            <form class="form" action="./translation-language" method="PATCH">
+
+                <% Object.entries(languages).forEach(([key, value]) => { %>
+                <input type="radio" id="<%= key %>" name="translation-language" value="<%= key %>" class="visually-hidden" <%= key === 'en' ? 'checked' : ''%>>
+                <label class="translation-language-option" for="<%= key %>"><%= value %></label>
+                <% }); %>
+
+                <!-- <input type="radio" id="en" name="translation-language" value="en" checked class="visually-hidden">
+                <label class="translation-language-option" for="en">inglés</label>
+
+                <input type="radio" id="ru" name="translation-language" value="ru" class="visually-hidden">
+                <label class="translation-language-option" for="ru">ruso</label>
+
+                <input type="radio" id="de" name="translation-language" value="de" class="visually-hidden">
+                <label class="translation-language-option" for="de">alemán</label> -->
+
+                <button class="button button-primary">Ahora Sí</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
+
+<script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault()
+        const transLang = document.querySelector('input[type = radio]:checked').value;
+        console.log(transLang)
+        fetch("./translation-language", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({transLang})
+        })
+        .then(res => {
+            window.location.href = res.url;
+        })
+    })
+</script>
