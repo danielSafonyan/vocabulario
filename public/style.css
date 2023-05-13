@@ -2,6 +2,7 @@
   --main-color: #FFBA26;
   --primary-text-color: #242423;
   --main-bg-color: brown;
+  --grey-color: #F7FCFF;
 }
 
 .visually-hidden {
@@ -47,7 +48,7 @@ body {
 
 .input {
     padding: 1em;
-    background: #F7FCFF;
+    background: var(--grey-color);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 300px;
@@ -84,4 +85,27 @@ body {
     text-decoration: none;
     padding-bottom: 0.1em;
     border-bottom: 1px solid;
+}
+
+.translation-language-option {
+    display: block;
+    text-align: center;
+    padding: 1em;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 1rem;
+    margin-bottom: 0.5em;
+    color: var(--primary-text-color);
+    font-size: 1rem;
+    background-color: var(--grey-color);
+    cursor: pointer;
+}
+
+.translation-language-option:last-of-type {
+    margin-bottom: 3rem;
+}
+
+input[type = radio]:checked + label {
+    font-weight: 700;
+    background-color: var(--main-color);
 }
