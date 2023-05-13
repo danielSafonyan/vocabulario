@@ -71,6 +71,10 @@ body {
     background-color: var(--main-color);
 }
 
+.button-secondary {
+    background-color: var(--main-color);
+}
+
 .login-link {
     display: block;
     width: fit-content;
