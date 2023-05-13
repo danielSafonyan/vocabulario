@@ -6,7 +6,12 @@ const mongoose = require('mongoose')
 require('../config/database')
 const User = mongoose.models.User;
 const genPassword = require('../lib/passwordUtils').genPassword;
-const { getTranslationLanguage } = require('./translationLanguage')
+const { 
+    getTranslationLanguage, 
+    getSuggestionLanguage, 
+    patchTranslationLanguage, 
+    patchSuggestionLanguage 
+} = require('./translationLanguage')
 
 router.route('/register')
             .get(getRegister)
@@ -24,11 +29,12 @@ router.route('/login')
             }))
 
 router.route('/suggested-language')
-            .get(getLanguageSuggestion)
-            .patch(patchLanguageSuggestion)
+            .get(getSuggestionLanguage)
+            .patch(patchSuggestionLanguage)
 
-router.route('.translation-language')
+router.route('/translation-language')
             .get(getTranslationLanguage)
+            .patch(patchTranslationLanguage)
 
 router.get('/protected-route', (req, res) => {
     const isAuth = req.isAuthenticated()
@@ -95,54 +101,5 @@ function getRegister(req, res, next) {
 function getLogin(req, res, next) {
     res.status(200).render('login')
 }
-
-function getLanguageSuggestion(req, res, next) {
-    const isReferred = req.headers.referer && req.headers.referer !== req.url;
-    
-    // if (!isReferred) {
-    //     return next(createError(404, "Not Found"))
-    // }
-
-    const languages = {
-        'en': 'inglés',
-        'ru': 'ruso',
-        'de': 'alemán',
-        'it': 'italiano',
-        'fr': 'francés'
-    }
-    const defaultLanguage = 'en'
-    const acceptLanguageHeader = req.headers['accept-language'] || defaultLanguage;
-    const languageRegex = /(en|ru|de|it|fr|es)/i;
-    const transLang = acceptLanguageHeader.match(languageRegex).pop()
-    const dispLang = languages[transLang]
-    res.status(200).render('suggestedLanguage', { dispLang, transLang })
-}
-
-async function patchLanguageSuggestion(req, res, next) {
-    if (!req.user) {
-        res.redirect('/');
-    }
-
-    // Get data from the request
-    const userId = req.session.passport.user
-    const { transLang } = req.body
-
-
-    try {
-        console.log(`Updating ${userId} in db. Setting transLang to ${transLang}.`)
-        const updatedUser = await User.findByIdAndUpdate(userId, { transLang:  transLang}, { new: true })
-        console.log('updatedUser', updatedUser)
-    } catch (err) {
-        next(err)
-    }
-
-    // redirect to the '/' if it's after registration
-    res.redirect(303, '/');
-    // redirect to 'settings if regferrer is settings'
-    // TODO
-    
-}
-
-
 
 module.exports = router
