@@ -108,9 +108,9 @@ function getLanguageSuggestions(req, res, next) {
     const defaultLanguage = 'en'
     const acceptLanguageHeader = req.headers['accept-language'] || defaultLanguage;
     const languageRegex = /(en|ru|de|it|fr|es)/i;
-    const suggestedLanguage = acceptLanguageHeader.match(languageRegex).pop()
-    const displayedLanguage = languages[suggestedLanguage]
-    res.status(200).render('suggestedLanguage', { displayedLanguage })
+    const transLang = acceptLanguageHeader.match(languageRegex).pop()
+    const dispLang = languages[transLang]
+    res.status(200).render('suggestedLanguage', { dispLang, transLang })
 }
 
 
