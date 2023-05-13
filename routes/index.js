@@ -10,16 +10,24 @@ const genPassword = require('../lib/passwordUtils').genPassword;
 router.route('/register')
             .get(getRegister)
             .post(postRegister)
+            
+router.get('/', (req, res) => {
+    res.send("Language saved!")
+})
 
 router.route('/login')
             .get(getLogin)
             .post(passport.authenticate('local', {
                 successRedirect: '/success',
                 failureRedirect: '/fail',
-            }), postLogin)
+            }))
 
 router.route('/suggested-language')
             .get(getLanguageSuggestions)
+            // .patch((req, res, next) => {
+            //     res.send("ok")
+            // })
+router.patch('/suggested-language', patchLanguageSuggestions)
 
 router.get('/protected-route', (req, res) => {
     const isAuth = req.isAuthenticated()
@@ -65,6 +73,7 @@ async function postRegister(req, res, next) {
         email: req.body.username,
         hash: hash,
         salt: salt,
+        transLang: ''
     });
 
     try {
@@ -84,11 +93,6 @@ function getRegister(req, res, next) {
 
 function getLogin(req, res, next) {
     res.status(200).render('login')
-}
-
-function postLogin(req, res, next) {
-    const body = req.body
-    res.status(200).json(body)
 }
 
 function getLanguageSuggestions(req, res, next) {
@@ -112,6 +116,32 @@ function getLanguageSuggestions(req, res, next) {
     const dispLang = languages[transLang]
     res.status(200).render('suggestedLanguage', { dispLang, transLang })
 }
+
+async function patchLanguageSuggestions(req, res, next) {
+    if (!req.user) {
+        res.redirect('/');
+    }
+
+    // Get data from the request
+    const userId = req.session.passport.user
+    const { transLang } = req.body
+
+
+    try {
+        console.log(`Updating ${userId} in db. Setting transLang to ${transLang}.`)
+        const updatedUser = await User.findByIdAndUpdate(userId, { transLang:  transLang}, { new: true })
+        console.log('updatedUser', updatedUser)
+    } catch (err) {
+        next(err)
+    }
+
+    // redirect to the '/' if it's after registration
+    res.redirect(303, '/');
+    // redirect to 'settings if regferrer is settings'
+    // TODO
+    
+}
+
 
 
 module.exports = router

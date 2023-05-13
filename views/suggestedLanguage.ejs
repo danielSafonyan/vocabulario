@@ -18,8 +18,8 @@
         <main class="app-container">
             <h2 class="title">¡Hola!</h2>
             <h2 class="title">¿Quieres traducir al <%= dispLang %>?</h2>
-            <form class="form" action="./suggested-language" method="POST">
-                <input name="trans-lang" type="hidden" value="<%= transLang %>">
+            <form class="form" action="./suggested-language" method="PATCH">
+                <!-- <input id="trans-lang" name="trans-lang" type="hidden" value="<%= transLang %>"> -->
                 <button class="button button-primary">Sí</button>
                 <!-- <button class="button button-secondary">No</button> -->
             </form>
@@ -28,3 +28,21 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault()
+        const transLang = '<%= transLang %>'
+        console.log(transLang)
+        fetch("./suggested-language", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({transLang})
+        })
+        .then(res => {
+            window.location.href = res.url;
+        })
+    })
+</script>
