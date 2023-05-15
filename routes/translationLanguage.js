@@ -48,10 +48,10 @@ function patchSuggestionLanguage(req, res, next) {
 }
 
 async function updateTransLang(req, next) {
-    const userId = req.session.passport.user
     const { transLang } = req.body
-
+    
     try {
+        const userId = req.session.passport.user 
         console.log(`Updating ${userId} in db. Setting transLang to ${transLang}.`)
         const updatedUser = await User.findByIdAndUpdate(userId, { transLang:  transLang}, { new: true })
         console.log('updatedUser', updatedUser)
