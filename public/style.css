@@ -38,7 +38,6 @@ body {
 
 .app-container {
     width: 90%;
-
 }
 
 .form {
@@ -58,6 +57,8 @@ body {
 }
 
 .button {
+    display: block;
+    width: 100%;
     padding: 1em;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
     border: none;
@@ -74,7 +75,7 @@ body {
 }
 
 .button-secondary {
-    background-color: var(--main-color);
+    background-color: var(--grey-color);
 }
 
 .login-link {
@@ -109,3 +110,58 @@ input[type = radio]:checked + label {
     font-weight: 700;
     background-color: var(--main-color);
 }
+
+/*
+    MAIN SCREEN START
+*/
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 2rem;
+    width: 90%;
+}
+
+.search-bar {
+  display: flex;
+  border-radius: 300px;
+  align-items: center;
+  border: 1px solid var(--main-color);
+  overflow: hidden;
+  background-color: var(--grey-color);
+
+   position: absolute;
+   top: 6rem;
+   width: 90%;
+}
+
+.search-bar input {
+  flex: 1;
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.search-bar input:focus{
+    outline: none;
+}
+
+.search-bar button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.fa-search {
+  color: #999;
+}
+
+/*
+    MAIN SCREEN END
+*/
+
