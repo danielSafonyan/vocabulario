@@ -23,7 +23,7 @@
             </div>
             <form class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Traducir en Ingles">
+                <input type="text" placeholder="Traducir en Inglés">
             </form>
             <h2 class="title">¡Hola, Conejito!</h2>
                 <!-- <label for="name" class="visually-hidden">Your Name</label>
@@ -35,3 +35,16 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault()
+        const word = document.querySelector('input').value;
+        const api = "./translation"
+        const requestUrl = `${api}?word=${word}`
+        fetch(requestUrl)
+        // .then(res => {
+        //     window.location.href = res.url;
+        // })
+    })
+</script>
