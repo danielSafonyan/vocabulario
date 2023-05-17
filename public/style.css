@@ -137,6 +137,12 @@ input[type = radio]:checked + label {
    width: 90%;
 }
 
+.search-bar i {
+    margin-left: 1.3rem;
+    padding: 0;
+}
+
+
 .search-bar input {
   flex: 1;
   width: 100%;
@@ -150,12 +156,7 @@ input[type = radio]:checked + label {
     outline: none;
 }
 
-.search-bar button {
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
+
 
 .fa-search {
   color: #999;
