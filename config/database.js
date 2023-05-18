@@ -18,9 +18,21 @@ const UserSchema = new mongoose.Schema({
     transLang: String
 });
 
+const WordSchema = new mongoose.Schema({
+  word: String,
+  type: String,
+  translation: {
+    ru: String,
+    en: String
+  },
+  definition: String,
+  usage: String
+});
+
 connectDB()
 
 const User = mongoose.model('User', UserSchema);
+const Word = mongoose.model('Word', WordSchema);
 
 async function connectDB() {
     try {
