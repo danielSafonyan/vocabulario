@@ -43,8 +43,9 @@
         const api = "./translation"
         const requestUrl = `${api}?word=${word}`
         fetch(requestUrl)
-        // .then(res => {
-        //     window.location.href = res.url;
-        // })
+        .then(res => {
+            console.log(res)
+            window.location.href = res.url;
+        })
     })
 </script>

@@ -19,14 +19,13 @@ const UserSchema = new mongoose.Schema({
 });
 
 const WordSchema = new mongoose.Schema({
-  word: String,
-  type: String,
-  translation: {
-    ru: String,
-    en: String
-  },
+  baseForm: String,
   definition: String,
-  usage: String
+  example: String,
+  translation: {
+    russian: String,
+    english: String
+  }
 });
 
 connectDB()

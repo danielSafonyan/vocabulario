@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <title>Main Vocabulario</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/ca767f7de3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="root">
+        <main class="app-container">
+            <div class="nav">
+                <a class="back-arrow" href="./.."><i class="fa-solid fa-arrow-left"></i></a>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <!-- {
+    "baseForm": "sentir",
+    "definition": "Experimentar una sensación o emoción.",
+    "example": "Siento felicidad al ver a mis hijos.",
+    "translation": {
+      "russian": "чувствовать",
+      "english": "to feel"
+    }
+  } -->
+            <div class="word">
+                <div>
+                    <!-- <span class="baseForm">comer</span>: -->
+                    <span class="baseForm"><%= wordObj.baseForm %></span>:
+                    <span class="definition"><%= wordObj.definition.toLowerCase() %></span>
+                </div>
+                <div class="translation"><%= wordObj.translation.russian %></div>
+                <div class="example"><%= wordObj.example %></div>
+            </div>
+            <div class="add-word">+</div>
+        </main>
+    </div>
+</body>
+</html>
+
+<script>
+    document.querySelector('.translation').addEventListener('click', (e) => {
+        e.preventDefault()
+        e.target.style.filter = 'none'
+    })
+    document.querySelector('.add-word').addEventListener('click', (e) => {
+        e.preventDefault()
+        e.target.textContent = '✔'
+        console.log("Adding the word to the user's list.")
+    })
+</script>

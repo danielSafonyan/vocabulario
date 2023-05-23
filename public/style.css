@@ -40,6 +40,10 @@ body {
     width: 90%;
 }
 
+.back-arrow {
+    color: var(--primary-text-color);
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -166,3 +170,29 @@ input[type = radio]:checked + label {
     MAIN SCREEN END
 */
 
+/* WORD START*/
+.word {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    padding: 1rem;
+    background-color: var(--grey-color);
+    border-radius: 1rem;
+}
+.baseForm {
+    font-weight: 700;
+}
+.translation {
+    align-self: center;
+    font-weight: 700;
+    filter: blur(2px);
+}
+.add-word {
+    margin-top: 3rem;
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: 5rem;
+    text-align: center;
+}
+/* WORD END*/

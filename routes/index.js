@@ -13,12 +13,26 @@ const {
     patchSuggestionLanguage 
 } = require('./translationLanguage')
 
+const { getTranslation } = require('./translation')
+
+const wordList = require('./../lib/wordList')
+
 router.route('/register')
             .get(getRegister)
             .post(postRegister)
             
 router.get('/', (req, res) => {
-    res.send("Language saved!")
+    res.render('main')
+})
+
+router.get('/word/:word', (req, res) => {
+    const { word } = req.params
+
+    const wordObj = wordList.find(el => el.baseForm === word)
+    if (!wordObj) {
+        return res.send(`Couldn't find ${word}`)
+    }
+    res.render('word',{ wordObj })
 })
 
 router.route('/login')
@@ -35,6 +49,8 @@ router.route('/suggested-language')
 router.route('/translation-language')
             .get(getTranslationLanguage)
             .patch(patchTranslationLanguage)
+
+router.get('/translation', getTranslation)
 
 router.get('/protected-route', (req, res) => {
     const isAuth = req.isAuthenticated()
