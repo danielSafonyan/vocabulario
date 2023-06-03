@@ -22,9 +22,9 @@
                 <i class="fa-solid fa-user"></i>
             </div>
             <form class="add-word-form">
-                <input type="text" name="baseWord" placeholder="Añade una palabra" required>
-                <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición" required>
-                <input type="text" class="visually-hidden" name="wordTranslation" placeholder="Ejemplo" required>
+                <input type="text" name="baseWord" placeholder="Añade una palabra" required autocomplete="off">
+                <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición" required autocomplete="off">
+                <input type="text" class="visually-hidden" name="wordTranslation" placeholder="Ejemplo" required autocomplete="off">
                 <button class="visually-hidden"></button>
             </form>
             <h2 class="title">¡Hola, Conejito!</h2>
@@ -75,7 +75,6 @@
             wordDefinition,
             wordTranslation
         }
-
 
         const options = {
             method: 'POST',
