@@ -22,9 +22,9 @@
                 <i class="fa-solid fa-user"></i>
             </div>
             <form class="add-word-form">
-                <input type="text" name="baseWord" placeholder="Añade una palabra">
-                <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición">
-                <input type="text" class="visually-hidden" name="wordTranslation" placeholder="Ejemplo">
+                <input type="text" name="baseWord" placeholder="Añade una palabra" required>
+                <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición" required>
+                <input type="text" class="visually-hidden" name="wordTranslation" placeholder="Ejemplo" required>
                 <button class="visually-hidden"></button>
             </form>
             <h2 class="title">¡Hola, Conejito!</h2>
@@ -57,36 +57,38 @@
 
     form.addEventListener('submit', e => {
         e.preventDefault()
-        const newWord = {
-            baseWord: baseWord.value,
-            wordDefinition: wordDefinition.value,
-            wordTranslation: wordTranslation.value
+        const formData = new FormData(form)
+
+        const baseWord = formData.get('baseWord').trim()
+        const wordDefinition = formData.get('wordDefinition').trim()
+        const wordTranslation = formData.get('wordTranslation').trim()
+
+        const isEmpty = !(baseWord && wordDefinition && wordTranslation)
+
+        if (isEmpty) {
+            alert("Donde esta la palabra, definicion o ejemplo?");
+            return
         }
 
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newWord)
-        };
+        // const options = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(newWord)
+        // };
 
-        console.log('Using POST method to add a new word to the user.', newWord)
-        fetch('/addWord', options)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        // console.log('Using POST method to add a new word to the user.', newWord)
+        // fetch('/addWord', options)
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        // })
+        // .catch(error => {
+        //     console.error(error);
+        // });
 
-        
-        baseWord.value = ''
-        wordDefinition.value = ''
-        wordTranslation.value = ''
-        wordDefinition.classList.add('visually-hidden')
-        wordTranslation.classList.add('visually-hidden')
+    
 
     })
 </script>
