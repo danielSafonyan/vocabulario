@@ -82,7 +82,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newWord)
+            body: JSON.stringify({newWord: newWord})
         };
 
         console.log('Using POST method to add a new word to the user.', newWord)
