@@ -15,7 +15,12 @@ const UserSchema = new mongoose.Schema({
     email: String,
     hash: String,
     salt: String,
-    transLang: String
+    transLang: String,
+    wordList: [{
+            baseWord: String,
+            wordDefinition: String,
+            wordTranslation: String
+        }]
 });
 
 const WordSchema = new mongoose.Schema({

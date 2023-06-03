@@ -30,7 +30,8 @@ async function postRegister(req, res, next) {
         email: req.body.username,
         hash: hash,
         salt: salt,
-        transLang: ''
+        transLang: '',
+        wordList: []
     });
 
     try {
