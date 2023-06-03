@@ -70,25 +70,32 @@
             return
         }
 
-        // const options = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newWord)
-        // };
+        const newWord = {
+            baseWord,
+            wordDefinition,
+            wordTranslation
+        }
 
-        // console.log('Using POST method to add a new word to the user.', newWord)
-        // fetch('/addWord', options)
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log(data);
-        // })
-        // .catch(error => {
-        //     console.error(error);
-        // });
 
-    
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newWord)
+        };
 
+        console.log('Using POST method to add a new word to the user.', newWord)
+        fetch('/addWord', options)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Success");
+            console.log(data);
+            form.reset()
+        })
+        .catch(error => {
+            console.error("Fail");
+            console.error(error);
+        });
     })
 </script>
