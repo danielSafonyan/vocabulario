@@ -3,6 +3,10 @@ const createError = require('http-errors')
 const path = require('path');
 const passport = require('passport');
 
+const mongoose = require('mongoose')
+require('../config/database')
+const User = mongoose.models.User;
+
 const { postRegister, getRegister } = require('./register')
 
 router.route('/register')
@@ -19,10 +23,24 @@ router.route('/login')
             }))
 
 router.route('/addWord')
-            .post((req, res, next) => {
-                if (!req.isAuthenticated()) { return res.json({status: 'error'})}
-                
-                res.json({status: 'ok'})
+            .post(async (req, res, next) => {
+                if (!req.isAuthenticated()) {
+                            return res.status(401).json({ err: 'Not Authenticated' });
+                        }
+                const { newWord } = req.body
+                if (!newWord) {
+                            return res.status(400).json({ err: 'No Word In Payload' });
+                        }
+                const userId = req.user.id
+
+                try {
+                    const user = await User.findById(userId)
+                    user.wordList.push(newWord)
+                    await user.save();
+                    res.status(200).json({msg: `Word ${newWord.baseWord} added successfully.`})
+                } catch (err) {
+                    return res.status(500).json({ err });
+                }
                     })
 
 router.get('/', (req, res) => {
