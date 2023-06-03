@@ -21,9 +21,11 @@
                 <i class="fa-solid fa-arrow-left"></i>
                 <i class="fa-solid fa-user"></i>
             </div>
-            <form class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Traducir en Inglés">
+            <form class="add-word-form">
+                <input type="text" name="baseWord" placeholder="Añade una palabra">
+                <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición">
+                <input type="text" class="visually-hidden" name="wordTranslation" placeholder="Ejemplo">
+                <button class="visually-hidden"></button>
             </form>
             <h2 class="title">¡Hola, Conejito!</h2>
                 <!-- <label for="name" class="visually-hidden">Your Name</label>
@@ -37,15 +39,54 @@
 </html>
 
 <script>
-    document.querySelector('form').addEventListener('submit', (e) => {
+    const form = document.querySelector('form');
+    const baseWord = document.querySelector('[name="baseWord"]');
+    const wordDefinition = document.querySelector('[name="wordDefinition"]');
+    const wordTranslation = document.querySelector('[name="wordTranslation"]');
+
+    document.addEventListener('click', e => {
+        const isForm = form.contains(e.target)
+        if (isForm) {
+            wordDefinition.classList.remove('visually-hidden')
+            wordTranslation.classList.remove('visually-hidden')
+        } else {
+            wordDefinition.classList.add('visually-hidden')
+            wordTranslation.classList.add('visually-hidden')
+        }
+    })
+
+    form.addEventListener('submit', e => {
         e.preventDefault()
-        const word = document.querySelector('input').value;
-        const api = "./translation"
-        const requestUrl = `${api}?word=${word}`
-        fetch(requestUrl)
-        .then(res => {
-            console.log(res)
-            window.location.href = res.url;
+        const newWord = {
+            baseWord: baseWord.value,
+            wordDefinition: wordDefinition.value,
+            wordTranslation: wordTranslation.value
+        }
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newWord)
+        };
+
+        console.log('Using POST method to add a new word to the user.', newWord)
+        fetch('/addWord', options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
         })
+        .catch(error => {
+            console.error(error);
+        });
+
+        
+        baseWord.value = ''
+        wordDefinition.value = ''
+        wordTranslation.value = ''
+        wordDefinition.classList.add('visually-hidden')
+        wordTranslation.classList.add('visually-hidden')
+
     })
 </script>

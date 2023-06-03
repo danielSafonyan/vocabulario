@@ -39,7 +39,6 @@
                 <div class="translation"><%= wordObj.translation.russian %></div>
                 <div class="example"><%= wordObj.example %></div>
             </div>
-            <div class="add-word">+</div>
         </main>
     </div>
 </body>
@@ -49,10 +48,5 @@
     document.querySelector('.translation').addEventListener('click', (e) => {
         e.preventDefault()
         e.target.style.filter = 'none'
-    })
-    document.querySelector('.add-word').addEventListener('click', (e) => {
-        e.preventDefault()
-        e.target.textContent = '✔'
-        console.log("Adding the word to the user's list.")
     })
 </script>
