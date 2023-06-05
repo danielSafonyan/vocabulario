@@ -8,6 +8,7 @@ require('../config/database')
 const User = mongoose.models.User;
 
 const { postRegister, getRegister } = require('./register')
+const { getWordList } = require('./wordList')
 
 router.route('/register')
             .get(getRegister)
@@ -37,13 +38,19 @@ router.route('/addWord')
                     const user = await User.findById(userId)
                     user.wordList.push(newWord)
                     await user.save();
-                    res.status(200).json({msg: `Word ${newWord.baseWord} added successfully.`})
+                    res.status(200).json({status: 200, msg: `Word ${newWord.baseWord} added successfully.`})
                 } catch (err) {
                     return res.status(500).json({ err });
                 }
                     })
 
+router.route('/wordList')
+                    .get(getWordList)
+
 router.get('/', (req, res) => {
+    if (!req.isAuthenticated()) {
+                            return res.status(401).json({ err: 'Not Authenticated' });
+                        }
     res.render('main')
 })
 

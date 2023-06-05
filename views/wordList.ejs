@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <title>Main Vocabulario</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/ca767f7de3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="root">
+        <main class="app-container">
+            <div class="nav">
+                <a class="back-arrow" href="./.."><i class="fa-solid fa-arrow-left"></i></a>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h2 class="title">Ciento Veintiséis Palabras</h2>
+            <div class="wordList">
+                <!-- <div class="wordList--word-container" data-word-id="1fsadsafsad23">
+                    <i class="fa-solid fa-xmark"></i>
+                    comer
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </div>
+                <div class="wordList--word-container" data-word-id="4213413">
+                    <i class="fa-solid fa-xmark"></i>
+                    comer
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </div>
+                <div class="wordList--word-container" data-word-id="adfssfsa">
+                    <i class="fa-solid fa-xmark"></i>
+                    comer
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </div> -->
+                <% wordList.forEach(word => { %>
+                <div class="wordList--word-container" data-word-id="<%= word._id %>">
+                    <i class="fa-solid fa-xmark"></i>
+                    <%= word.baseWord %>
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </div>
+                <% }) %>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
+<script>
+    document.addEventListener('click', e => {
+        if (e.target.classList.contains('fa-pen-to-square')) {
+            const wordContainer = e.target.closest('.wordList--word-container')
+            const wordId = wordContainer.dataset.wordId
+            console.log("Sending EDIT request for word with id:", wordId)
+        }
+        if (e.target.classList.contains('fa-xmark')) {
+            const wordContainer = e.target.closest('.wordList--word-container')
+            const wordId = wordContainer.dataset.wordId
+            console.log("Sending DELETE request for word with id:", wordId)
+        }
+    })
+</script>

@@ -58,7 +58,6 @@
     form.addEventListener('submit', e => {
         e.preventDefault()
         const formData = new FormData(form)
-
         const baseWord = formData.get('baseWord').trim()
         const wordDefinition = formData.get('wordDefinition').trim()
         const wordTranslation = formData.get('wordTranslation').trim()
@@ -86,10 +85,13 @@
 
         console.log('Using POST method to add a new word to the user.', newWord)
         fetch('/addWord', options)
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-            console.log("Success");
-            console.log(data);
+            if (data.status === 200) {
+                alert("Word was added.")
+            } else {
+                alert("Something went wrong!")
+            }
             form.reset()
         })
         .catch(error => {
