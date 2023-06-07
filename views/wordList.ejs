@@ -72,6 +72,14 @@
             body: JSON.stringify({newword})
         }
         fetch(url, options)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 200) {
+                        console.log("Word edited.")
+                        alert("Word edited.")
+                        location.reload()
+                    }
+            })
     })
 
     document.addEventListener('click', e => {
