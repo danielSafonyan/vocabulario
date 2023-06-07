@@ -9,26 +9,33 @@ async function getWordList(req, res, next) {
 
     const { wordList } = await User.findById(req.user.id)
 
-    console.log(wordList.pop())
-
     res.status(200).render('wordList', { wordList })
 }
 
 
 async function deleteWordList(req, res, next) {
-    const { wordId } = req.body
-    const user = await User.findById(req.user.id)
-    
-    console.log("listlengthBefore" , user.wordList.length)
-    const wordIndex = user.wordList.findIndex(el => el.id === wordId)
-    user.wordList.splice(wordIndex, 1)
-    console.log("listlengthAfter" , user.wordList.length)
-    await user.save()
+    try {
+        const user = await User.findById(req.user.id)
+        if (!user) {
+            return res.status(404).json({ status: 404, message: "User not found" });
+        }
+        
+        const wordIndex = user.wordList.findIndex(el => el.id === req.body.wordId)
+        if (wordIndex === -1) {
+            return res.status(404).json({ status: 404, message: "Word not found" });
+        }
 
-    res.status(200).json({
-        status: 200,
-        msg: "Successfully deleted a word!"
-    })
+        user.wordList.splice(wordIndex, 1)
+        await user.save()
+    
+        res.status(200).json({
+            status: 200,
+            msg: "Successfully deleted a word!"
+        })
+    } catch (err) {
+        console.error("Error deleting word:", err);
+        res.status(500).json({ status: 500, message: "Internal Server Error", err });
+    }
 }
 
 
