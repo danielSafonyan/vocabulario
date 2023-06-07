@@ -67,7 +67,12 @@
             }
             fetch(url, options) 
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    if (data.status === 200) {
+                        console.log("Word deleted.")
+                        wordContainer.remove()
+                    }
+                })
         }
         if (e.target.classList.contains('fa-pen-to-square')) {
             const wordContainer = e.target.closest('.wordList--word-container')
