@@ -8,7 +8,7 @@ require('../config/database')
 const User = mongoose.models.User;
 
 const { postRegister, getRegister } = require('./register')
-const { getWordList } = require('./wordList')
+const { getWordList, deleteWordList } = require('./wordList')
 
 router.route('/register')
             .get(getRegister)
@@ -46,6 +46,7 @@ router.route('/addWord')
 
 router.route('/wordList')
                     .get(getWordList)
+                    .delete(deleteWordList)
 
 router.get('/', (req, res) => {
     if (!req.isAuthenticated()) {
