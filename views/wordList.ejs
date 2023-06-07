@@ -57,7 +57,7 @@
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
             console.log("Sending DELETE request for word with id:", wordId)
-            const url = "/addWord"
+            const url = "/wordList"
             const options = {
                 method: "DELETE",
                 headers: {
