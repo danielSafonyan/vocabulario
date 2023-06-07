@@ -47,13 +47,13 @@ async function patchWordList(req, res, next) {
         if (!user) {
             return res.status(404).json({ status: 404, message: "User not found" });
         }
-        const wordFound = user.wordList.find(el => el.id === req.body.newword.wordId)
+        const wordFound = user.wordList.find(el => el.id === req.body.newWord.wordId)
         if (!wordFound) {
             return res.status(404).json({ status: 404, message: "Word not found" });
         }
-        wordFound.baseWord = req.body.newword.baseWord
-        wordFound.wordDefinition = req.body.newword.wordDefinition
-        wordFound.wordTranslation = req.body.newword.wordTranslation
+        wordFound.baseWord = req.body.newWord.baseWord
+        wordFound.wordDefinition = req.body.newWord.wordDefinition
+        wordFound.wordTranslation = req.body.newWord.wordTranslation
 
         await user.save()
     

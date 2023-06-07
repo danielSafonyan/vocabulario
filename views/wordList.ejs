@@ -57,7 +57,7 @@
     form.addEventListener('submit', e => {
         e.preventDefault()
         const formData = new FormData(form)
-        const newword = {
+        const newWord = {
             baseWord: formData.get('baseWord'),
             wordDefinition: formData.get('wordDefinition'),
             wordTranslation: formData.get('wordTranslation'),
@@ -69,7 +69,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({newword})
+            body: JSON.stringify({newWord})
         }
         fetch(url, options)
             .then(res => res.json())
@@ -78,6 +78,8 @@
                         console.log("Word edited.")
                         alert("Word edited.")
                         location.reload()
+                    } else {
+                        alert("Something went wrong.")
                     }
             })
     })
