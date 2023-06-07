@@ -41,9 +41,37 @@ async function deleteWordList(req, res, next) {
     }
 }
 
+async function patchWordList(req, res, next) {
+    try {
+        const user = await User.findById(req.user.id)
+        if (!user) {
+            return res.status(404).json({ status: 404, message: "User not found" });
+        }
+        const wordFound = user.wordList.find(el => el.id === req.body.newword.wordId)
+        if (!wordFound) {
+            return res.status(404).json({ status: 404, message: "Word not found" });
+        }
+        wordFound.baseWord = req.body.newword.baseWord
+        wordFound.wordDefinition = req.body.newword.wordDefinition
+        wordFound.wordTranslation = req.body.newword.wordTranslation
+
+        await user.save()
+    
+        res.status(200).json({
+            status: 200,
+            msg: "Successfully edited a word!"
+        })
+    } catch (err) {
+        console.error("Error editing word:", err);
+        res.status(500).json({ status: 500, message: "Internal Server Error", err });
+    }
+}
+
+
 
 
 module.exports = {
     getWordList,
-    deleteWordList
+    deleteWordList,
+    patchWordList
 }
