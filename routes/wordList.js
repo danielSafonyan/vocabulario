@@ -6,10 +6,13 @@ async function getWordList(req, res, next) {
     if (!req.isAuthenticated()) {
                             return res.status(401).json({ err: 'Not Authenticated' });
                         }
-
-    const { wordList } = await User.findById(req.user.id)
-
-    res.status(200).render('wordList', { wordList })
+    try {
+        const { wordList } = await User.findById(req.user.id)
+        res.status(200).render('wordList', { wordList })
+    } catch (err) {
+        console.error("Error deleting word:", err);
+        res.status(500).json({ status: 500, message: "Internal Server Error", err });
+    }              
 }
 
 
