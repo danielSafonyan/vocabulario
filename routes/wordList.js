@@ -14,6 +14,26 @@ async function getWordList(req, res, next) {
     res.status(200).render('wordList', { wordList })
 }
 
+
+async function deleteWordList(req, res, next) {
+    const { wordId } = req.body
+    const user = await User.findById(req.user.id)
+    
+    console.log("listlengthBefore" , user.wordList.length)
+    const wordIndex = user.wordList.findIndex(el => el.id === wordId)
+    user.wordList.splice(wordIndex, 1)
+    console.log("listlengthAfter" , user.wordList.length)
+    await user.save()
+
+    res.status(200).json({
+        status: 200,
+        msg: "Successfully deleted a word!"
+    })
+}
+
+
+
 module.exports = {
-    getWordList
+    getWordList,
+    deleteWordList
 }
