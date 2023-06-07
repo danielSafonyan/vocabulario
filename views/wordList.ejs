@@ -53,15 +53,27 @@
 
 <script>
     document.addEventListener('click', e => {
-        if (e.target.classList.contains('fa-pen-to-square')) {
-            const wordContainer = e.target.closest('.wordList--word-container')
-            const wordId = wordContainer.dataset.wordId
-            console.log("Sending EDIT request for word with id:", wordId)
-        }
         if (e.target.classList.contains('fa-xmark')) {
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
             console.log("Sending DELETE request for word with id:", wordId)
+            const url = "/addWord"
+            const options = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ wordId })
+            }
+            fetch(url, options) 
+                .then(res => res.json())
+                .then(data => console.log(data))
         }
+        if (e.target.classList.contains('fa-pen-to-square')) {
+            const wordContainer = e.target.closest('.wordList--word-container')
+            const wordId = wordContainer.dataset.wordId
+            console.log("Sending PATCH request for word with id:", wordId)
+        }
+        
     })
 </script>
