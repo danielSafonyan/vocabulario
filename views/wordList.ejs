@@ -21,25 +21,25 @@
                 <a class="back-arrow" href="./.."><i class="fa-solid fa-arrow-left"></i></a>
                 <i class="fa-solid fa-user"></i>
             </div>
+            <div class="blank-screen visually-hidden">
+                
+            </div>
+            <form class="add-word-form word-editor visually-hidden">
+                    <input type="text" name="baseWord" placeholder="Palabra" required autocomplete="off">
+                    <input type="text" name="wordDefinition" placeholder="Definición" required autocomplete="off">
+                    <input type="text" name="wordTranslation" placeholder="Ejemplo" required autocomplete="off">
+                    <input type="hidden" name="wordId">
+                    <button class="visually-hidden"></button>
+                </form>
             <h2 class="title">Ciento Veintiséis Palabras</h2>
             <div class="wordList">
-                <!-- <div class="wordList--word-container" data-word-id="1fsadsafsad23">
-                    <i class="fa-solid fa-xmark"></i>
-                    comer
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </div>
-                <div class="wordList--word-container" data-word-id="4213413">
-                    <i class="fa-solid fa-xmark"></i>
-                    comer
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </div>
-                <div class="wordList--word-container" data-word-id="adfssfsa">
-                    <i class="fa-solid fa-xmark"></i>
-                    comer
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </div> -->
                 <% wordList.forEach(word => { %>
-                <div class="wordList--word-container" data-word-id="<%= word._id %>">
+                <div class="wordList--word-container" 
+                    data-word-id="<%= word._id %>"
+                    data-base-word="<%= word.baseWord %>"
+                    data-word-definition="<%= word.wordDefinition %>"
+                    data-word-translation="<%= word.wordTranslation %>"
+                >
                     <i class="fa-solid fa-xmark"></i>
                     <%= word.baseWord %>
                     <i class="fa-regular fa-pen-to-square"></i>
@@ -52,7 +52,33 @@
 </html>
 
 <script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        const formData = new FormData(form)
+        const newword = {
+            baseWord: formData.get('baseWord'),
+            wordDefinition: formData.get('wordDefinition'),
+            wordTranslation: formData.get('wordTranslation'),
+            wordId: formData.get('wordId'),
+        }
+        const url = './wordList'
+        const options = {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({newword})
+        }
+        fetch(url, options)
+    })
+
     document.addEventListener('click', e => {
+        if (e.target.classList.contains('blank-screen')) {
+            e.target.classList.add('visually-hidden')
+            form.classList.add('visually-hidden')
+        }
         if (e.target.classList.contains('fa-xmark')) {
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
@@ -78,7 +104,17 @@
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
             console.log("Sending PATCH request for word with id:", wordId)
+            
+            const { baseWord , wordDefinition, wordTranslation } = wordContainer.dataset
+            
+            document.querySelector('[name="baseWord"]').value = baseWord
+            document.querySelector('[name="wordDefinition"]').value = wordDefinition
+            document.querySelector('[name="wordTranslation"]').value = wordTranslation
+            document.querySelector('[name="wordId"]').value = wordId
+            
+            console.log("It's ok!")
+            document.querySelector('.blank-screen').classList.remove('visually-hidden')
+            form.classList.remove('visually-hidden')
         }
-        
     })
 </script>
