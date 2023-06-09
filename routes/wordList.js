@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 // require('../config/database')
 const User = mongoose.models.User;
+const getSpanishNumberWord = require("../lib/getSpanishNumberWord")
 
 async function getWordList(req, res, next) {
     if (!req.isAuthenticated()) {
@@ -8,7 +9,13 @@ async function getWordList(req, res, next) {
                         }
     try {
         const { wordList } = await User.findById(req.user.id)
-        res.status(200).render('wordList', { wordList })
+        let spanishNumberWord = getSpanishNumberWord(wordList.length)
+        if (wordList.length % 10 === 1) {
+            spanishNumberWord += " Palabra"
+        } else {
+            spanishNumberWord += " Palabras"
+        }
+        res.status(200).render('wordList', { wordList, spanishNumberWord })
     } catch (err) {
         console.error("Error deleting word:", err);
         res.status(500).json({ status: 500, message: "Internal Server Error", err });
@@ -66,9 +73,6 @@ async function patchWordList(req, res, next) {
         res.status(500).json({ status: 500, message: "Internal Server Error", err });
     }
 }
-
-
-
 
 module.exports = {
     getWordList,
