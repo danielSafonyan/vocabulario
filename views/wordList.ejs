@@ -27,7 +27,7 @@
             <form class="add-word-form word-editor visually-hidden">
                     <input type="text" name="baseWord" placeholder="Palabra" required autocomplete="off">
                     <input type="text" name="wordDefinition" placeholder="Definición" required autocomplete="off">
-                    <input type="text" name="wordTranslation" placeholder="Ejemplo" required autocomplete="off">
+                    <input type="text" name="wordExample" placeholder="Ejemplo" required autocomplete="off">
                     <input type="hidden" name="wordId">
                     <button class="visually-hidden"></button>
                 </form>
@@ -38,7 +38,7 @@
                     data-word-id="<%= word._id %>"
                     data-base-word="<%= word.baseWord %>"
                     data-word-definition="<%= word.wordDefinition %>"
-                    data-word-translation="<%= word.wordTranslation %>"
+                    data-word-example="<%= word.wordExample %>"
                 >
                     <i class="fa-solid fa-xmark"></i>
                     <%= word.baseWord %>
@@ -60,7 +60,7 @@
         const newWord = {
             baseWord: formData.get('baseWord'),
             wordDefinition: formData.get('wordDefinition'),
-            wordTranslation: formData.get('wordTranslation'),
+            wordExample: formData.get('wordExample'),
             wordId: formData.get('wordId'),
         }
         const url = './wordList'
@@ -115,11 +115,11 @@
             const wordId = wordContainer.dataset.wordId
             console.log("Sending PATCH request for word with id:", wordId)
             
-            const { baseWord , wordDefinition, wordTranslation } = wordContainer.dataset
+            const { baseWord , wordDefinition, wordExample } = wordContainer.dataset
             
             document.querySelector('[name="baseWord"]').value = baseWord
             document.querySelector('[name="wordDefinition"]').value = wordDefinition
-            document.querySelector('[name="wordTranslation"]').value = wordTranslation
+            document.querySelector('[name="wordExample"]').value = wordExample
             document.querySelector('[name="wordId"]').value = wordId
             
             console.log("It's ok!")

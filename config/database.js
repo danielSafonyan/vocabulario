@@ -23,20 +23,20 @@ const UserSchema = new mongoose.Schema({
         }]
 });
 
-const WordSchema = new mongoose.Schema({
-  baseForm: String,
-  definition: String,
-  example: String,
-  translation: {
-    russian: String,
-    english: String
-  }
-});
+// const WordSchema = new mongoose.Schema({
+//   baseForm: String,
+//   definition: String,
+//   example: String,
+//   translation: {
+//     russian: String,
+//     english: String
+//   }
+// });
 
 connectDB()
 
 const User = mongoose.model('User', UserSchema);
-const Word = mongoose.model('Word', WordSchema);
+// const Word = mongoose.model('Word', WordSchema);
 
 async function connectDB() {
     try {
