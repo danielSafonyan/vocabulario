@@ -200,10 +200,8 @@ input[type = radio]:checked + label {
 .baseForm {
     font-weight: 700;
 }
-.translation {
-    align-self: center;
-    font-weight: 700;
-    filter: blur(2px);
+.blur {
+    filter: blur(5px);
 }
 
 .add-word {
@@ -255,3 +253,23 @@ input[type = radio]:checked + label {
 }
 
 /* WORDLIST END */
+
+/* PRACTICEWORDS START */
+.word-number {
+    text-align: center;
+}
+.word-container {
+    background-color: var(--grey-color);
+    border-radius: 1rem;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.baseWord {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    margin-left: 0.5em;
+}
+/* PRACTICEWORDS END */

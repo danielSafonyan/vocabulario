@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <title>Main Vocabulario</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/ca767f7de3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="root">
+        <main class="app-container">
+            <div class="nav">
+                <a class="back-arrow" href="./.."><i class="fa-solid fa-arrow-left"></i></a>
+                <!-- <i class="fa-solid fa-user"></i> -->
+            </div>
+            <div class="blank-screen visually-hidden">
+            </div>
+            <p class="word-number">1/5</p>
+            <div class="word-container">
+                <div class="wordDefinition"></div>
+                <div class="wordExample blur"></div>
+                <form><strong>palabra:</strong><input class="baseWord"></form>
+            </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
+<script>
+    const doc = new DOMParser().parseFromString('<%= practiceWordlist %>', "text/html");
+    const practiceWordlist = JSON.parse(doc.documentElement.textContent)
+    const listLength = practiceWordlist.length
+
+    const wordDefinition = document.querySelector(".wordDefinition")
+    const wordExample = document.querySelector(".wordExample")
+    const baseWord = document.querySelector(".baseWord")
+    const form = document.querySelector("form")
+    const wordNumber = document.querySelector(".word-number")
+    const wordContainer = document.querySelector(".word-container")
+    const appContainer = document.querySelector(".app-container")
+
+    let currentWord
+    updateWordContent()
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        if (practiceWordlist.length === 0) {
+            wordContainer.remove()
+            wordNumber.remove()
+            appContainer.innerHTML += (`<h2 class="title">¿Quieres más?</h2>`)
+            appContainer.innerHTML += (`<a onclick="window.location.reload()" class="button button-primary">Sí</a>`)
+            appContainer.innerHTML += (`<a href="../" class="login-link">No</a>`)
+
+            return console.log("Все повторено!")
+        }
+        if (baseWord.value === currentWord.baseWord) {
+            console.log("You guseed it, next!")
+            updateWordContent()
+        }
+    })
+
+    document.addEventListener('click', e => {
+        if (wordExample === e.target.closest('.wordExample')) {
+            wordExample.classList.remove('blur')
+        }
+    })
+
+    function updateWordContent() {
+        console.log("practiceWordlist", practiceWordlist)
+        currentWord = practiceWordlist.shift()
+        wordDefinition.innerHTML = `<strong>definición:</strong> ${currentWord.wordDefinition}`
+        wordExample.innerHTML = `<strong>ejemplo:</strong> ${currentWord.wordExample}`
+        wordNumber.textContent = `${listLength - practiceWordlist.length}/${listLength}`
+        baseWord.value = ''
+        wordExample.classList.add('blur')
+    }
+</script>

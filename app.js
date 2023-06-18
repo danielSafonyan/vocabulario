@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo');
 require('dotenv').config()
 const router = require('./routes')
 
+
 /**
  * -------------- GENERAL SETUP ----------------
  */

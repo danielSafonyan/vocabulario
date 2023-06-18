@@ -17,20 +17,20 @@
 <body>
     <div id="root">
         <main class="app-container">
-            <div class="nav">
+            <!-- <div class="nav">
                 <i class="fa-solid fa-arrow-left"></i>
                 <i class="fa-solid fa-user"></i>
-            </div>
+            </div> -->
             <form class="add-word-form">
                 <input type="text" name="baseWord" placeholder="Añade una palabra" required autocomplete="off">
                 <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición" required autocomplete="off">
-                <input type="text" class="visually-hidden" name="wordTranslation" placeholder="Ejemplo" required autocomplete="off">
+                <input type="text" class="visually-hidden" name="wordExample" placeholder="Ejemplo" required autocomplete="off">
                 <button class="visually-hidden"></button>
             </form>
             <h2 class="title">¡Hola, Conejito!</h2>
                 <!-- <label for="name" class="visually-hidden">Your Name</label>
                 <input id="name" name="name" class="input" type="text" required minlength="3" placeholder="Name" value="danielSafonyan"> -->
-                <a class="button button-primary">Practicar Vocabulario</a>
+                <a href="./practiceWords" class="button button-primary">Practicar Vocabulario</a>
                 <a href="./wordList" class="button button-secondary">Mi Lista de Palabras</a>
             <!-- <a href="#" class="btn btn-secondary">Iniciar sesión</a> -->
         </main>
@@ -42,16 +42,16 @@
     const form = document.querySelector('form');
     const baseWord = document.querySelector('[name="baseWord"]');
     const wordDefinition = document.querySelector('[name="wordDefinition"]');
-    const wordTranslation = document.querySelector('[name="wordTranslation"]');
+    const wordExample = document.querySelector('[name="wordExample"]');
 
     document.addEventListener('click', e => {
         const isForm = form.contains(e.target)
         if (isForm) {
             wordDefinition.classList.remove('visually-hidden')
-            wordTranslation.classList.remove('visually-hidden')
+            wordExample.classList.remove('visually-hidden')
         } else {
             wordDefinition.classList.add('visually-hidden')
-            wordTranslation.classList.add('visually-hidden')
+            wordExample.classList.add('visually-hidden')
         }
     })
 
@@ -60,9 +60,9 @@
         const formData = new FormData(form)
         const baseWord = formData.get('baseWord').trim()
         const wordDefinition = formData.get('wordDefinition').trim()
-        const wordTranslation = formData.get('wordTranslation').trim()
+        const wordExample = formData.get('wordExample').trim()
 
-        const isEmpty = !(baseWord && wordDefinition && wordTranslation)
+        const isEmpty = !(baseWord && wordDefinition && wordExample)
 
         if (isEmpty) {
             alert("Donde esta la palabra, definicion o ejemplo?");
@@ -72,7 +72,7 @@
         const newWord = {
             baseWord,
             wordDefinition,
-            wordTranslation
+            wordExample
         }
 
         const options = {

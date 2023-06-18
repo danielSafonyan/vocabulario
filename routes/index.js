@@ -9,6 +9,7 @@ const User = mongoose.models.User;
 
 const { postRegister, getRegister } = require('./register')
 const { getWordList, deleteWordList, patchWordList } = require('./wordList')
+const { getPracticeWords } = require('./practiceWords')
 
 router.route('/register')
             .get(getRegister)
@@ -48,6 +49,9 @@ router.route('/wordList')
                     .get(getWordList)
                     .delete(deleteWordList)
                     .patch(patchWordList)
+
+router.route('/practiceWords')
+                    .get(getPracticeWords)
 
 router.get('/', (req, res) => {
     if (!req.isAuthenticated()) {

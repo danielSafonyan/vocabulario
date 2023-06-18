@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
     wordList: [{
             baseWord: String,
             wordDefinition: String,
-            wordTranslation: String
+            wordExample: String
         }]
 });
 
