@@ -55,7 +55,7 @@ router.route('/practiceWords')
 
 router.get('/', (req, res) => {
     if (!req.isAuthenticated()) {
-                            return res.status(401).json({ err: 'Not Authenticated' });
+                            return res.render('login');
                         }
     res.render('main')
 })
