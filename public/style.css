@@ -169,6 +169,12 @@ input:focus{
   color: #999;
 }
 
+.addWordBtn {
+    background-color: var(--main-color);
+    width: 30%;
+    margin: auto;
+}
+
 /*
     MAIN SCREEN END
 */

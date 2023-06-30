@@ -21,12 +21,12 @@
                 <i class="fa-solid fa-arrow-left"></i>
                 <i class="fa-solid fa-user"></i>
             </div> -->
-            <form class="add-word-form">
+            <form class="add-word-form" id="add-word-form">
                 <input type="text" name="baseWord" placeholder="Añade una palabra" required autocomplete="off">
                 <input type="text" class="visually-hidden" name="wordDefinition" placeholder="Definición" required autocomplete="off">
-                <input type="search" class="visually-hidden" name="wordExample" placeholder="Ejemplo" required autocomplete="off">
-                <button class="visually-hidden"></button>
+                <input type="text" class="visually-hidden" name="wordExample" placeholder="Ejemplo" required autocomplete="off">
             </form>
+            <button form="add-word-form" class="button addWordBtn visually-hidden">+</button>
             <h2 class="title">¡Hola, Conejito!</h2>
                 <!-- <label for="name" class="visually-hidden">Your Name</label>
                 <input id="name" name="name" class="input" type="text" required minlength="3" placeholder="Name" value="danielSafonyan"> -->
@@ -43,6 +43,7 @@
     const baseWord = document.querySelector('[name="baseWord"]');
     const wordDefinition = document.querySelector('[name="wordDefinition"]');
     const wordExample = document.querySelector('[name="wordExample"]');
+    const addWordBtn = document.querySelector('.addWordBtn');
     const practiceWordsBtn = document.querySelector('[href="./practiceWords"]');
     
     practiceWordsBtn.addEventListener('click', e => {
@@ -58,13 +59,15 @@
     })
 
     document.addEventListener('click', e => {
-        const isForm = form.contains(e.target)
+        const isForm = form.contains(e.target) || addWordBtn.contains(e.target)
         if (isForm) {
             wordDefinition.classList.remove('visually-hidden')
             wordExample.classList.remove('visually-hidden')
+            addWordBtn.classList.remove('visually-hidden')
         } else {
             wordDefinition.classList.add('visually-hidden')
             wordExample.classList.add('visually-hidden')
+            addWordBtn.classList.add('visually-hidden')
         }
     })
 
