@@ -22,15 +22,17 @@
                 <!-- <i class="fa-solid fa-user"></i> -->
             </div>
             <div class="blank-screen visually-hidden">
-                
+            <div class="word-editor">
+                    <form id="add-word-form" class="add-word-form visually-hidden">
+                        <input type="text" name="baseWord" placeholder="Palabra" required autocomplete="off">
+                        <input type="text" name="wordDefinition" placeholder="Definición" required autocomplete="off">
+                        <input type="text" name="wordExample" placeholder="Ejemplo" required autocomplete="off">
+                        <input type="hidden" name="wordId">
+                        <button class="visually-hidden"></button>
+                    </form>
+                    <button form="add-word-form" class="button addWordBtn visually-hidden">+</button>
             </div>
-            <form class="add-word-form word-editor visually-hidden">
-                    <input type="text" name="baseWord" placeholder="Palabra" required autocomplete="off">
-                    <input type="text" name="wordDefinition" placeholder="Definición" required autocomplete="off">
-                    <input type="text" name="wordExample" placeholder="Ejemplo" required autocomplete="off">
-                    <input type="hidden" name="wordId">
-                    <button class="visually-hidden"></button>
-                </form>
+            </div>
             <h2 class="title"><%= spanishNumberWord %></h2>
             <div class="wordList">
                 <% wordList.forEach(word => { %>
@@ -53,6 +55,7 @@
 
 <script>
     const form = document.querySelector('form');
+    const addWordBtn = document.querySelector('.addWordBtn');
 
     form.addEventListener('submit', e => {
         e.preventDefault()
@@ -88,6 +91,7 @@
         if (e.target.classList.contains('blank-screen')) {
             e.target.classList.add('visually-hidden')
             form.classList.add('visually-hidden')
+            addWordBtn.classList.add('visually-hidden')
         }
         if (e.target.classList.contains('fa-xmark')) {
             const wordContainer = e.target.closest('.wordList--word-container')
@@ -125,6 +129,7 @@
             console.log("It's ok!")
             document.querySelector('.blank-screen').classList.remove('visually-hidden')
             form.classList.remove('visually-hidden')
+            addWordBtn.classList.remove('visually-hidden')
         }
     })
 </script>
