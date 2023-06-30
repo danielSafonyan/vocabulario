@@ -43,6 +43,17 @@
     const baseWord = document.querySelector('[name="baseWord"]');
     const wordDefinition = document.querySelector('[name="wordDefinition"]');
     const wordExample = document.querySelector('[name="wordExample"]');
+    const practiceWordsBtn = document.querySelector('[href="./practiceWords"]');
+    
+    practiceWordsBtn.addEventListener('click', e => {
+        e.preventDefault()
+        fetch(e.target.href)
+        .then(res => {
+            if (res.status === 200) { return window.open(res.url) }
+            return res.json()
+        })
+        .then(data => alert(data.msg))
+    })
 
     document.addEventListener('click', e => {
         const isForm = form.contains(e.target)

@@ -10,7 +10,9 @@ async function getPracticeWords(req, res, next) {
     try {
         const { wordList } = await User.findById(req.user.id)
         if (wordList.length < 5) {
-            return res.status(200).send("You shouls have at least five words to start practicing!")
+            return res.status(428).json({
+                msg: "You should have at least five words to start practicing!"
+            })
         }
         
         shuffleArray(wordList)
