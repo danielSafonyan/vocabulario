@@ -139,10 +139,7 @@ input[type = radio]:checked + label {
     border: 1px solid var(--main-color);
     overflow: hidden;
     background-color: var(--grey-color);
-
-    position: absolute;
-    top: 6rem;
-    width: 90%;
+    margin-bottom: 1rem;
 }
 
 .add-word-form i {
