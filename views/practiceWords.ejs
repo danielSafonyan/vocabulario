@@ -51,21 +51,26 @@
     let currentWord
     updateWordContent()
 
-    form.addEventListener('submit', e => {
-        e.preventDefault()
-        if (practiceWordlist.length === 0) {
-            wordContainer.remove()
-            wordNumber.remove()
-            appContainer.innerHTML += (`<h2 class="title">¿Quieres más?</h2>`)
-            appContainer.innerHTML += (`<a onclick="window.location.reload()" class="button button-primary">Sí</a>`)
-            appContainer.innerHTML += (`<a href="../" class="login-link">No</a>`)
-
-            return console.log("Все повторено!")
+    baseWord.addEventListener('input', e => {
+        const targetWord = currentWord.baseWord.slice(0, baseWord.value.length)
+        console.log('baseWord.value', baseWord.value)
+        console.log('targetWord', targetWord)
+        if (baseWord.value === targetWord) {
+            console.log("убираем класс инвалид")
+            baseWord.style.borderBottom = ''
+        } else {
+            console.log("накидываем класс инвалид")
+            baseWord.style.borderBottom = 'solid red'
         }
+
         if (baseWord.value === currentWord.baseWord) {
             console.log("You guseed it, next!")
             updateWordContent()
         }
+    })
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
     })
 
     document.addEventListener('click', e => {
@@ -77,10 +82,24 @@
     function updateWordContent() {
         console.log("practiceWordlist", practiceWordlist)
         currentWord = practiceWordlist.shift()
+        if (!currentWord) { return engGame() }
         wordDefinition.innerHTML = `<strong>definición:</strong> ${currentWord.wordDefinition}`
         wordExample.innerHTML = `<strong>ejemplo:</strong> ${currentWord.wordExample}`
         wordNumber.textContent = `${listLength - practiceWordlist.length}/${listLength}`
         baseWord.value = ''
         wordExample.classList.add('blur')
+        baseWord.focus()
+    }
+
+    function engGame() {
+        if (practiceWordlist.length === 0) {
+            wordContainer.remove()
+            wordNumber.remove()
+            appContainer.innerHTML += (`<h2 class="title">¿Quieres más?</h2>`)
+            appContainer.innerHTML += (`<a onclick="window.location.reload()" class="button button-primary">Sí</a>`)
+            appContainer.innerHTML += (`<a href="../" class="login-link">No</a>`)
+
+            return console.log("Все повторено!")
+        }
     }
 </script>

@@ -161,11 +161,9 @@ input[type = radio]:checked + label {
   overflow: hidden;
 }
 
-.add-word-form input:focus{
+input:focus{
     outline: none;
 }
-
-
 
 .fa-search {
   color: #999;
