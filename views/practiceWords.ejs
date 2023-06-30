@@ -65,7 +65,8 @@
 
         if (baseWord.value === currentWord.baseWord) {
             console.log("You guseed it, next!")
-            updateWordContent()
+            baseWord.style.borderBottom = 'solid green'
+            setTimeout(updateWordContent, 500)
         }
     })
 
@@ -80,7 +81,7 @@
     })
 
     function updateWordContent() {
-        console.log("practiceWordlist", practiceWordlist)
+        baseWord.style.borderBottom = ''
         currentWord = practiceWordlist.shift()
         if (!currentWord) { return engGame() }
         wordDefinition.innerHTML = `<strong>definición:</strong> ${currentWord.wordDefinition}`
