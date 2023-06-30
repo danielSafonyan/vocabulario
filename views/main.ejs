@@ -49,10 +49,12 @@
         e.preventDefault()
         fetch(e.target.href)
         .then(res => {
-            if (res.status === 200) { return window.open(res.url) }
+            if (res.status === 200) { return window.location.assign(res.url) }
             return res.json()
         })
-        .then(data => alert(data.msg))
+        .then(data => {
+            if (data ) { alert(data.msg) }
+        })
     })
 
     document.addEventListener('click', e => {
