@@ -4,9 +4,6 @@ const User = mongoose.models.User;
 const shuffleArray = require('../lib/getPracticeWordsArray')
 
 async function getPracticeWords(req, res, next) {
-    if (!req.isAuthenticated()) {
-                            return res.status(401).json({ err: 'Not Authenticated' });
-                        }
     try {
         const { wordList } = await User.findById(req.user.id)
         if (wordList.length < 5) {

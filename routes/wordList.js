@@ -4,9 +4,6 @@ const User = mongoose.models.User;
 const getSpanishNumberWord = require("../lib/getSpanishNumberWord")
 
 async function getWordList(req, res, next) {
-    if (!req.isAuthenticated()) {
-                            return res.status(401).json({ err: 'Not Authenticated' });
-                        }
     try {
         const { wordList } = await User.findById(req.user.id)
         let spanishNumberWord = getSpanishNumberWord(wordList.length)

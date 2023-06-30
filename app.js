@@ -45,10 +45,24 @@ require('./config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use((req, res, next) => {
+  if (req.path === '/login' || req.path === '/register') {
+    next(); // Skip authentication middleware for login and register routes
+  } else {
+    authenticate(req, res, next); // Apply authentication middleware for other routes
+  }
+});
+
 // Imports all of the routes from ./routes/index.js
 app.use(router)
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+function authenticate(req, res, next) {
+    if (req.isAuthenticated()) { return next() }
+    res.redirect('/login');
+}
