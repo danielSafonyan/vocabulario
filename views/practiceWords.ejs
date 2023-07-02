@@ -36,6 +36,7 @@
 </html>
 
 <script>
+    document.querySelector('#root').style.height = `${window.innerHeight}px`
     const doc = new DOMParser().parseFromString('<%= practiceWordlist %>', "text/html");
     const practiceWordlist = JSON.parse(doc.documentElement.textContent)
     const listLength = practiceWordlist.length
