@@ -56,9 +56,12 @@
 <script>
     const form = document.querySelector('form');
     const addWordBtn = document.querySelector('.addWordBtn');
+    let isDeleting = false
 
     form.addEventListener('submit', e => {
         e.preventDefault()
+        addWordBtn.disabled = true
+        addWordBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
         const formData = new FormData(form)
         const newWord = {
             baseWord: formData.get('baseWord'),
@@ -94,6 +97,10 @@
             addWordBtn.classList.add('visually-hidden')
         }
         if (e.target.classList.contains('fa-xmark')) {
+            if (isDeleting) { return }
+            isDeleting = true
+            // e.target.className = 'fas fa-spinner fa-spin'
+            e.target.className = 'fas fa-cog fa-spin'
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
             console.log("Sending DELETE request for word with id:", wordId)

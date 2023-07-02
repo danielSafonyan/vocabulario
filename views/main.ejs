@@ -73,6 +73,8 @@
 
     form.addEventListener('submit', e => {
         e.preventDefault()
+        addWordBtn.disabled = true
+        addWordBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
         const formData = new FormData(form)
         const baseWord = formData.get('baseWord').trim()
         const wordDefinition = formData.get('wordDefinition').trim()
@@ -108,6 +110,8 @@
             } else {
                 alert("Something went wrong!")
             }
+            addWordBtn.disabled = false
+            addWordBtn.innerHTML = '+'
             form.reset()
         })
         .catch(error => {

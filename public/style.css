@@ -229,7 +229,11 @@ input:focus{
 .wordList--word-container {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem;
+    align-items: center;
+}
+
+.wordList--word-container i {
+    padding: 0.5em;
 }
 
 .wordList--word-container:not(:last-child) {
@@ -247,6 +251,10 @@ input:focus{
     left: 0;
     right: 0;
 
+}
+
+i {
+    display: block;
 }
 
 .blank-screen {
