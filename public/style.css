@@ -290,6 +290,11 @@ i {
     flex-direction: column;
     gap: 1rem;
 }
+
+.word-container form {
+    display: flex;
+}
+
 .baseWord {
     background: none;
     border: none;
