@@ -22,6 +22,11 @@ body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-color: var(--main-bg-color);
+    font-size: 1.2rem;
+}
+
+input {
+    font-size: 1.2rem;
 }
 
 #root {
@@ -52,7 +57,7 @@ body {
     flex-direction: column;
 }
 
-.input {
+/* .input {
     padding: 1em;
     background: var(--grey-color);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
@@ -60,8 +65,10 @@ body {
     border-radius: 300px;
     margin-bottom: 1em;
     text-indent: 0.5em;
-    font-size: 1rem;
-}
+    font-size: 1.1rem;
+} */
+
+
 
 .button {
     display: block;
@@ -153,7 +160,6 @@ input[type = radio]:checked + label {
   width: 100%;
   border: none;
   padding: 1rem;
-  font-size: 16px;
   background-color: transparent;
   overflow: hidden;
 }
@@ -274,6 +280,7 @@ i {
 /* PRACTICEWORDS START */
 .word-number {
     text-align: center;
+    font-size: 1rem;
 }
 .word-container {
     background-color: var(--grey-color);
