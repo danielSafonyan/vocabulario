@@ -57,7 +57,7 @@ input {
     flex-direction: column;
 }
 
-/* .input {
+.input {
     padding: 1em;
     background: var(--grey-color);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
@@ -66,9 +66,7 @@ input {
     margin-bottom: 1em;
     text-indent: 0.5em;
     font-size: 1.1rem;
-} */
-
-
+}
 
 .button {
     display: block;
@@ -296,6 +294,7 @@ i {
 }
 
 .baseWord {
+    width: 70%;
     background: none;
     border: none;
     border-bottom: 2px solid var(--main-color);
