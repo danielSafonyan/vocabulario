@@ -65,6 +65,7 @@
         }
 
         if (baseWord.value === currentWord.baseWord) {
+            baseWord.disabled = true
             console.log("You guseed it, next!")
             baseWord.style.borderBottom = 'solid green'
             setTimeout(updateWordContent, 500)
@@ -90,6 +91,7 @@
         wordNumber.textContent = `${listLength - practiceWordlist.length}/${listLength}`
         baseWord.value = ''
         wordExample.classList.add('blur')
+        baseWord.disabled = false
         baseWord.focus()
     }
 
