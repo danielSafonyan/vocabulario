@@ -12,6 +12,7 @@ const mongoUri = process.env.DB_STRING;
 
 const UserSchema = new mongoose.Schema({
     username: String,
+    nickname: String,
     email: String,
     hash: String,
     salt: String,

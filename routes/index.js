@@ -51,7 +51,8 @@ router.route('/practiceWords')
                     .get(getPracticeWords)
 
 router.get('/', (req, res) => {
-    res.render('main')
+    console.log(req.user)
+    res.render('main', { nickname: req.user.nickname })
 })
 
 router.get('/logout', function(req, res, next){
