@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 require('../config/database')
 const User = mongoose.models.User;
 const genPassword = require('../lib/passwordUtils').genPassword;
+const getCuteNick = require('../lib/cuteWords')
 
 async function postRegister(req, res, next) {
     const saltHash = genPassword(req.body.password);
@@ -18,15 +19,13 @@ async function postRegister(req, res, next) {
         res.status(500).send(`Internal server error: ${err}.`)
     }
 
-    console.log('userExists:', userExists)
-
     if (userExists) {
         return res.status(409).send(`User ${req.body.username} already exists.`)
     }
 
     const newUser = new User({
         username: req.body.username,
-        // username: req.body.username, TODO: function generating random usernames.
+        nickname: getCuteNick(),
         email: req.body.username,
         hash: hash,
         salt: salt,
