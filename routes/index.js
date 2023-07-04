@@ -19,9 +19,10 @@ router.route('/login')
             .get((req, res, next) => {
                     res.status(200).render('login')
                 })
+                // .post(passport.authenticate('local'))
             .post(passport.authenticate('local', {
                 successRedirect: '/',
-                failureRedirect: '/login',
+                // failureRedirect: '/login',
             }))
 
 router.route('/addWord')

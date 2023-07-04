@@ -20,7 +20,7 @@ async function postRegister(req, res, next) {
     }
 
     if (userExists) {
-        return res.status(409).send(`User ${req.body.username} already exists.`)
+        return res.status(409).json({ msg: `User ${req.body.username} already exists.` })
     }
 
     const newUser = new User({
@@ -37,7 +37,7 @@ async function postRegister(req, res, next) {
         const user = await newUser.save()
         req.login(user, function(err) {
             if (err) { return next(err); }
-            return res.redirect('/');
+            return res.status(200).redirect('/');
             });
     } catch (err) {
         res.status(500).send(`Internal server error: ${err}.`)
