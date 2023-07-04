@@ -54,19 +54,14 @@
 
     baseWord.addEventListener('input', e => {
         const targetWord = currentWord.baseWord.slice(0, baseWord.value.length)
-        console.log('baseWord.value', baseWord.value)
-        console.log('targetWord', targetWord)
         if (baseWord.value === targetWord) {
-            console.log("убираем класс инвалид")
             baseWord.style.borderBottom = ''
         } else {
-            console.log("накидываем класс инвалид")
             baseWord.style.borderBottom = 'solid red'
         }
 
         if (baseWord.value === currentWord.baseWord) {
             baseWord.disabled = true
-            console.log("You guseed it, next!")
             baseWord.style.borderBottom = 'solid green'
             setTimeout(updateWordContent, 500)
         }
@@ -102,8 +97,6 @@
             appContainer.innerHTML += (`<h2 class="title">¿Quieres más?</h2>`)
             appContainer.innerHTML += (`<a onclick="window.location.reload()" class="button button-primary">Sí</a>`)
             appContainer.innerHTML += (`<a href="../" class="login-link">No</a>`)
-
-            return console.log("Все повторено!")
         }
     }
 </script>

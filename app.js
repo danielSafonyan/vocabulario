@@ -6,6 +6,7 @@ var crypto = require('crypto');
 const MongoStore = require('connect-mongo');
 require('dotenv').config()
 const router = require('./routes')
+const morgan = require('morgan')
 
 
 /**
@@ -14,6 +15,8 @@ const router = require('./routes')
 
 // Create the Express application
 const app = express()
+
+app.use(morgan('tiny'))
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');

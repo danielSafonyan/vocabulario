@@ -101,7 +101,6 @@
             body: JSON.stringify({newWord: newWord})
         };
 
-        console.log('Using POST method to add a new word to the user.', newWord)
         fetch('/addWord', options)
         .then(res => res.json())
         .then(data => {

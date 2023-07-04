@@ -55,7 +55,6 @@
             if (res.ok) { return location.href = res.url }
             if (res.status === 409) { alert("User already exists!")}
         })
-        // .then(data => console.log(data))
         .catch(error => {
             console.error("Fail");
             console.error(error);

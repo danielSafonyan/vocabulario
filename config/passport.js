@@ -39,32 +39,19 @@ passport.deserializeUser(async function(id, cb) {
 });
 
 function verifyFunction(username, password, next) {
-    console.log("verifyFunction is running!");
-    console.log("Username:", username);
-    console.log("Password:", password);
-
     User.findOne({ username })
         .then(user => {
-            console.log("User found:", user);
-
             if (!user) {
-                console.log("User not found");
                 return next(null, false);
             }
-
             const isValid = validPassword(password, user.hash, user.salt);
-            console.log("Password is valid:", isValid);
-
             if (isValid) {
-                console.log("Authentication successful");
                 return next(null, user);
             } else {
-                console.log("Invalid password");
                 return next(null, false);
             }
         })
         .catch(err => {
-            console.log("Error:", err);
             next(err);
         });
 }

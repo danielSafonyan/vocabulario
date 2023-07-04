@@ -82,7 +82,6 @@
             .then(res => res.json())
             .then(data => {
                 if (data.status === 200) {
-                        console.log("Word edited.")
                         alert("Word edited.")
                         location.reload()
                     } else {
@@ -104,7 +103,6 @@
             e.target.className = 'fas fa-cog fa-spin'
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
-            console.log("Sending DELETE request for word with id:", wordId)
             const url = "/wordList"
             const options = {
                 method: "DELETE",
@@ -117,7 +115,6 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === 200) {
-                        console.log("Word deleted.")
                         location.reload()
                     }
                 })
@@ -125,8 +122,6 @@
         if (e.target.classList.contains('fa-pen-to-square')) {
             const wordContainer = e.target.closest('.wordList--word-container')
             const wordId = wordContainer.dataset.wordId
-            console.log("Sending PATCH request for word with id:", wordId)
-            
             const { baseWord , wordDefinition, wordExample } = wordContainer.dataset
             
             document.querySelector('[name="baseWord"]').value = baseWord
@@ -134,7 +129,6 @@
             document.querySelector('[name="wordExample"]').value = wordExample
             document.querySelector('[name="wordId"]').value = wordId
             
-            console.log("It's ok!")
             document.querySelector('.blank-screen').classList.remove('visually-hidden')
             form.classList.remove('visually-hidden')
             addWordBtn.classList.remove('visually-hidden')

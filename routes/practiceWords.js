@@ -13,11 +13,7 @@ async function getPracticeWords(req, res, next) {
         }
         
         shuffleArray(wordList)
-        console.log(wordList)
         const practiceWordlist = JSON.stringify(wordList.slice(0, 5))
-
-        console.log(practiceWordlist)
-
         res.status(200).render('practiceWords', { practiceWordlist })
     } catch (err) {
         console.error("Error deleting word:", err);
